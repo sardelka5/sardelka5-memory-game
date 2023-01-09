@@ -1,8 +1,11 @@
-/* eslint-disable require-jsdoc */
 const container = document.querySelector('.container');
 const btn1 = document.querySelector('.level1');
 const btn2 = document.querySelector('.level2');
 const btn3 = document.querySelector('.level3');
+
+const counter = document.querySelector('.counter');
+let count = +localStorage.getItem('count') || 0;
+counter.innerText = count;
 
 // функция для получения рамдомного числа
 function randomCards(max, min = 1) {
@@ -47,21 +50,29 @@ function setListeners(array) {
   const arr2 = [];
   cards.forEach((card) => {
     card.addEventListener('click', (event) => {
-      if (array.includes(+event.target.dataset.index)) {
+      if (
+        array.includes(+event.target.dataset.index) &&
+        !arr2.includes(+event.target.dataset.index)
+      ) {
         card.classList.add('yellow');
         arr2.push(+event.target.dataset.index);
-        console.log(array, arr2);
       } else {
         card.classList.add('red');
         setTimeout(() => {
           alert('Вы неправильно выбрали карточку. Попробуйте еще раз.');
           location.reload();
+          count -= 1;
+          counter.innerText = count;
+          localStorage.setItem('count', JSON.stringify(count));
         }, 100);
       }
       if (arr2.length === array.length) {
         setTimeout(() => {
           alert('Вы всё угадали правильно!');
           location.reload();
+          count += 1;
+          counter.innerText = count;
+          localStorage.setItem('count', JSON.stringify(count));
         }, 100);
       }
     });
@@ -78,4 +89,10 @@ btn2.addEventListener('click', () => {
 
 btn3.addEventListener('click', () => {
   container.innerHTML = createCards(12, 1000);
+});
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', () => {
+  window.location.reload();
+  localStorage.removeItem('count');
 });
