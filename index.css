@@ -1,0 +1,46 @@
+* {
+  font-family: sans-serif;
+  font-size: 22px;
+  margin: 5px;
+  padding: 10px;
+}
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.rules {
+  text-align: center;
+}
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+.level1 {
+  background-color: rgb(1, 255, 1);
+}
+.level2 {
+  background-color: rgb(255, 145, 1);
+}
+.level3 {
+  background-color: rgb(255, 56, 1);
+}
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 400px;
+}
+.card {
+  width: 70px;
+  height: 70px;
+  border: 2px solid black;
+}
+.yellow {
+  background-color: yellow;
+}
+.red {
+  background-color: red;
+}
